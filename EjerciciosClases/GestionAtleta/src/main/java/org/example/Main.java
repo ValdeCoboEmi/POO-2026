@@ -24,7 +24,16 @@ public class Main {
         nadador1.clasificarRendimiento();
         nadador1.entrenar();
 
+        Nadador nadador2 = new Nadador("Federico", 25, Deporte.NATACION,
+                80, 1.85, new double[]{3, 5, 7, 8, 4, 6, 3},
+                0.0, 0.0, "Espalda");
+
         // Crear el equipo
+        Equipo equipo1 = new Equipo();
+        equipo1.setNombreEquipo("El pepe");
+        equipo1.agregarMiembro(nadador1);
+        equipo1.agregarMiembro(nadador2);
+        equipo1.imprimir();
 
 
         System.out.println("\nDatos del entrenador: ");
