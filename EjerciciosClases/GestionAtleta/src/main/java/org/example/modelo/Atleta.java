@@ -22,6 +22,7 @@ public abstract class Atleta implements Imprimible{
     // Construct vacio
     public Atleta(){
         horasEntrenamientodiarias = new double [7];
+        planActual = new PlanEntrenamiento();
     }
 
     // Constructor parametrizado
@@ -36,7 +37,7 @@ public abstract class Atleta implements Imprimible{
         this.horasEntrenamientodiarias = horas;
         this.imc = imc;
         this.promHorasEntrenamiento = promHorasEntrenamiento;
-
+        planActual = new PlanEntrenamiento();
     }
 
     // Metodos getter y setter
@@ -47,6 +48,14 @@ public abstract class Atleta implements Imprimible{
 
     public void setClasificacionIMC(String clasificacionIMC) {
         this.clasificacionIMC = clasificacionIMC;
+    }
+
+    public PlanEntrenamiento getPlanActual() {
+        return planActual;
+    }
+
+    public void setPlanActual(PlanEntrenamiento planActual) {
+        this.planActual = planActual;
     }
 
     public String getNombre() {
@@ -175,4 +184,5 @@ public abstract class Atleta implements Imprimible{
             return true;
         }
     }
+
 }

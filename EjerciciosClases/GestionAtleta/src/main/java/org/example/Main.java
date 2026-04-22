@@ -40,8 +40,12 @@ public class Main {
         // Crear al entrenador
         Entrenador entrenador1 = new Entrenador("Julio", 4);
         System.out.println("Salario del entrenador $: " + entrenador1.calcularSalario());
-        entrenador1.imprimir();
 
+        //AÑADIENDO ATLETA EN ENTRENADOR
+        entrenador1.agregarAtleta(nadador1);
+        entrenador1.agregarAtleta(nadador2);
+
+        entrenador1.imprimir();
 
         // Crear el plan de entrenamiento
         PlanEntrenamiento plan1 = new PlanEntrenamiento();
@@ -49,19 +53,18 @@ public class Main {
 
         //DETERMINAR EL OBJETIVO
         entrenador1.determinarObjetivoPlanEntrenamiento(nadador1);
+        plan1.setObjetivo(entrenador1.determinarObjetivoPlanEntrenamiento(nadador1));
 
         //IMPRIMIR OBEJTIVO QUE GENERO EL SISTEMA
-        System.out.println(entrenador1.determinarObjetivoPlanEntrenamiento(nadador1));
+        System.out.println("\n Objetivo asginado por el sistema: " + plan1.getObjetivo());
 
         // Agregar los datos del plan de entrenamiento, objetivos y ejercicios
-        plan1.setObjetivo(entrenador1.determinarObjetivoPlanEntrenamiento(nadador1));
         plan1.agregarEjercicios("Nado continuo", 60);
         plan1.agregarEjercicios("Series de velocidad", 30);
         plan1.imprimir();
 
-        // preescribir plan de entrenamiento al atleta
-
         // Imprimiendo el plan de entrenamiento asignado a un atleta
-
+        System.out.println("\nPlan de entrenamiento asignado al nadador: ");
+        nadador1.getPlanActual().imprimir();
     }
 }
