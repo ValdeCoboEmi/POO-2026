@@ -43,8 +43,12 @@ public class PlanEntrenamiento implements Imprimible {
 
     @Override
     public void imprimir() {
-        // agregar información
-
+        System.out.println("Plan de Entrenamiento:");
+        System.out.println("Objetivo: " + objetivo);
+        System.out.println("Ejercicios y Duración:");
+        for (Map.Entry<String, Double> entry : ejerciciosDuracion.entrySet()) {
+            System.out.println("- " + entry.getKey() + ": " + entry.getValue() + " minutos");
+        }
     }
 
 }
