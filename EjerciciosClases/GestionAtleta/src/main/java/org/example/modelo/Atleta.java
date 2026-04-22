@@ -16,6 +16,8 @@ public abstract class Atleta implements Imprimible{
     // nuevos atributos
     private double imc;
     private double promHorasEntrenamiento;
+    private String clasificacionIMC;
+    private PlanEntrenamiento planActual;
 
     // Construct vacio
     public Atleta(){
@@ -38,6 +40,15 @@ public abstract class Atleta implements Imprimible{
     }
 
     // Metodos getter y setter
+
+    public String getClasificacionIMC() {
+        return clasificacionIMC;
+    }
+
+    public void setClasificacionIMC(String clasificacionIMC) {
+        this.clasificacionIMC = clasificacionIMC;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -109,16 +120,21 @@ public abstract class Atleta implements Imprimible{
 
     }
 
-    public void clasificarIMC(){
+    public String clasificarIMC(){
         if (getImc() < 18.5){
-            System.out.println("Bajo peso");
+            clasificacionIMC = "Bajo peso";
         } else if (getImc() >= 18.5 && getImc() < 25) {
-            System.out.println("Peso normal");
+            clasificacionIMC = "Peso normal";
         } else if (getImc() >= 25 && getImc() < 30) {
-            System.out.println("Sobrepeso");
+            clasificacionIMC = "Sobrepeso";
         } else if (getImc() >= 30) {
-            System.out.println("Obesidad");
+            clasificacionIMC = "Obesidad";
         }
+        else{
+            clasificacionIMC = "Valor de IMC no válido";
+        }
+
+        return clasificacionIMC;
     }
 
     public void clasificarRendimiento(){
@@ -149,4 +165,14 @@ public abstract class Atleta implements Imprimible{
     }
 
     // metodo recibir plan de entrenamiento
+    public boolean recibirPLanEntrenamiento(PlanEntrenamiento planActual){
+        if (planActual == null) {
+            System.out.println("El plan de entrenamiento no puede ser nulo.");
+            return false;
+        }
+        else{
+            this.planActual = planActual;
+            return true;
+        }
+    }
 }

@@ -4,6 +4,7 @@ import org.example.catalogo.Deporte;
 import org.example.modelo.Entrenador;
 import org.example.modelo.Equipo;
 import org.example.modelo.Nadador;
+import org.example.modelo.PlanEntrenamiento;
 
 public class Main {
     public static void main(String[] args) {
@@ -18,8 +19,7 @@ public class Main {
         nadador1.cambiarEstilo("Libre (Crol)");
         // estableciendo el imc calculado
         nadador1.setImc(nadador1.calcularIMC());
-        System.out.print("Clasificación del IMC: ");
-        nadador1.clasificarIMC();
+        System.out.print("Clasificación del IMC: " + nadador1.clasificarIMC());
         System.out.print("Clasificación del rendimiento: ");
         nadador1.clasificarRendimiento();
         nadador1.entrenar();
@@ -43,11 +43,21 @@ public class Main {
         entrenador1.imprimir();
 
 
-        // Determinar el objetivo del plan de entrenamiento
-
         // Crear el plan de entrenamiento
+        PlanEntrenamiento plan1 = new PlanEntrenamiento();
+        plan1.imprimir();
+
+        //DETERMINAR EL OBJETIVO
+        entrenador1.determinarObjetivoPlanEntrenamiento(nadador1);
+
+        //IMPRIMIR OBEJTIVO QUE GENERO EL SISTEMA
+        System.out.println(entrenador1.determinarObjetivoPlanEntrenamiento(nadador1));
 
         // Agregar los datos del plan de entrenamiento, objetivos y ejercicios
+        plan1.setObjetivo(entrenador1.determinarObjetivoPlanEntrenamiento(nadador1));
+        plan1.agregarEjercicios("Nado continuo", 60);
+        plan1.agregarEjercicios("Series de velocidad", 30);
+        plan1.imprimir();
 
         // preescribir plan de entrenamiento al atleta
 

@@ -10,7 +10,7 @@ public class PlanEntrenamiento implements Imprimible {
     private String objetivo;
 
     // constructores
-    public PlanEntrenamiento(){
+    public PlanEntrenamiento() {
         this.ejerciciosDuracion = new HashMap<>();
     }
 
@@ -35,19 +35,30 @@ public class PlanEntrenamiento implements Imprimible {
 
 
     // metodos
-    public boolean agregarEjercicios(String nombre, double duracion){
-        ejerciciosDuracion.put(nombre, duracion);
-        return true;
+    public boolean agregarEjercicios(String nombre, double duracion) {
+        try {
+            if (nombre == null || nombre.isEmpty()) {
+                throw new IllegalArgumentException("El nombre del ejercicio no puede ser nulo o vacío.");
+            } else if (duracion <= 0) {
+                throw new IllegalArgumentException("La duración del ejercicio debe ser mayor a cero.");
+            }
+
+            ejerciciosDuracion.put(nombre, duracion);
+            return true;
+        } catch (Exception e) {
+            System.out.println("Error al agregar ejercicio: " + e.getMessage());
+            return false;
+        }
     }
 
 
     @Override
     public void imprimir() {
-        System.out.println("Plan de Entrenamiento:");
+        System.out.println("\nPlan de Entrenamiento:");
         System.out.println("Objetivo: " + objetivo);
         System.out.println("Ejercicios y Duración:");
-        for (Map.Entry<String, Double> entry : ejerciciosDuracion.entrySet()) {
-            System.out.println("- " + entry.getKey() + ": " + entry.getValue() + " minutos");
+        for (Map.Entry<String, Double> e : ejerciciosDuracion.entrySet()) {
+            System.out.println("- " + e.getKey() + ": " + e.getValue() + " minutos");
         }
     }
 
