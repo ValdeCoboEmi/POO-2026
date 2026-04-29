@@ -1,5 +1,7 @@
 package org.example.modelo;
 
+import org.example.patrones.estrategia.visualizacion.Reporte;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +44,14 @@ public class Entrenador implements Pagable, Imprimible {
 
     public List<Atleta> getAtletasAsignados() {
         return atletasAsignados;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     // no es necesario el set
@@ -107,5 +117,15 @@ public class Entrenador implements Pagable, Imprimible {
         return true;
     }
 
-
+    //ENVIAR REPORTE
+    public boolean enviarReporte(GestorReporte gestor, Reporte reporte){
+        if (gestor == null || reporte == null) {
+            System.out.println("Gestor de reportes o reporte no pueden ser nulos.");
+            return false;
+        }
+        else {
+            gestor.guardarReporte(reporte);
+            return true;
+        }
+    }
 }

@@ -11,6 +11,10 @@ application {
     mainClass = 'org.example/Main'
 }
 
+run {
+    standardInput = System.in
+}
+
 repositories {
     mavenCentral()
 }
