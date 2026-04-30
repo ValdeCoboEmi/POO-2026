@@ -64,10 +64,12 @@ public class Entrenador implements Pagable, Imprimible {
         // Si años de experiencia es mayor a 3 incrementar el 5%
         final double SALARIO_BASE = 2000;
 
-        if (experiencia >= 3) {
-            salario = SALARIO_BASE + (SALARIO_BASE * 0.05);
-        } else {
+        if (salario == 0){
             salario = SALARIO_BASE;
+        }
+
+        if (experiencia >= 3) {
+            salario = salario + (salario * 0.05);
         }
 
         return salario;

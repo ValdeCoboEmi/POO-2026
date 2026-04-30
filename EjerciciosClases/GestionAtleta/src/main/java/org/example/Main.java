@@ -11,7 +11,7 @@ import org.example.patrones.estrategia.visualizacion.Reporte;
 import org.example.patrones.estrategia.visualizacion.VisualizacionCompleta;
 import org.example.patrones.estrategia.visualizacion.VisualizacionSimple;
 import org.example.ui.DatosQuemados;
-import org.example.ui.EntradaDatosNadador;
+import org.example.ui.EntradaDatosAtleta;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ import java.util.Scanner;
 public class Main {
 
     private static final Scanner sc = new Scanner(System.in);
-    private static final EntradaDatosNadador entrada = new EntradaDatosNadador();
+    private static final EntradaDatosAtleta entrada = new EntradaDatosAtleta();
     private static final List<Atleta> atletas = new ArrayList<>();
 
     public static void main(String[] args) {
