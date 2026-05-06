@@ -91,6 +91,7 @@ public class Entrenador implements Pagable, Imprimible {
     // Metodos
     public boolean agregarAtleta(Atleta atleta) {
         return this.atletasAsignados.add(atleta);
+
     }
 
     // determinar Objetivo Plan de Entrenamiento
