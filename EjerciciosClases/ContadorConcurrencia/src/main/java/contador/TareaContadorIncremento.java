@@ -1,10 +1,10 @@
 package contador;
 
-public class HiloContador implements Runnable {
+public class TareaContadorIncremento implements Runnable {
     private Contador contador;
 
     //CONSTRUCTOR
-    public HiloContador(Contador contador) {
+    public TareaContadorIncremento(Contador contador) {
         this.contador = contador;
     }
 
@@ -21,13 +21,14 @@ public class HiloContador implements Runnable {
     public void run() {
         try {
 
-            for (int i = 1; i <= 5; i++) {
+            for (int i = 1; i <= 1000; i++) {
                 contador.incrementar();
-                Thread.sleep(3000);
+                //Thread.sleep(3000);
             }
 
         } catch (Exception e) {
             System.out.println("Error en el hilo: " + e.getMessage());
         }
+        //System.out.println("Hilo " + Thread.currentThread().getName() + " - Valor de incremento: " + contador.getContador());
     }
 }

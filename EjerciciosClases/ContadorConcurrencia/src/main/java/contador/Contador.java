@@ -3,6 +3,8 @@ package contador;
 public class Contador {
     //ATRIBUTOS
     private int contador = 0;
+    //Lock de sincronizacion
+    private final Object lock = new Object();
 
     //CONSTRUCTOR
     public Contador(){}
@@ -20,7 +22,20 @@ public class Contador {
         this.contador = contador;
     }
 
+    //public synchronized void incrementar(){
+    //    contador++;
+    //}
+
     public void incrementar(){
-        contador++;
+        synchronized (lock) {
+            contador++;
+        }
+    }
+
+    public void decrementar(){
+        synchronized (lock) {
+            contador = contador - 10;
+            //Contador =- 10;
+        }
     }
 }
