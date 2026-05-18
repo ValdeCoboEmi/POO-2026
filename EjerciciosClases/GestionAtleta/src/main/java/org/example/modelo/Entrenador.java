@@ -12,12 +12,11 @@ public class Entrenador implements Pagable, Imprimible {
     int experiencia;
     double salario;
     // Colección lista
-    List<Atleta> atletasAsignados;
+    List <Atleta> atletasAsignados;
 
     public Entrenador() {
         this.atletasAsignados = new ArrayList<>();
     }
-
     public Entrenador(String nombre, int experiencia) {
         this.nombre = nombre;
         this.experiencia = experiencia;
@@ -28,48 +27,33 @@ public class Entrenador implements Pagable, Imprimible {
     public double getSalario() {
         return salario;
     }
-
     // No es necesario el set
-    public void setSalario(double salario) {
+ /*   public void setSalario(double salario) {
         this.salario = salario;
-    }
-
+    }*/
     public int getExperiencia() {
         return experiencia;
     }
-
     public void setExperiencia(int experiencia) {
         this.experiencia = experiencia;
     }
-
     public List<Atleta> getAtletasAsignados() {
         return atletasAsignados;
     }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     // no es necesario el set
     public void setAtletasAsignados(List<Atleta> atletasAsignados) {
         this.atletasAsignados = atletasAsignados;
     }
 
     @Override
-    public double calcularSalario() {
+    public double calcularSalario(){
         // Si años de experiencia es mayor a 3 incrementar el 5%
         final double SALARIO_BASE = 2000;
 
-        if (salario == 0){
+        if (experiencia >= 3){
+            salario = SALARIO_BASE + (SALARIO_BASE * 0.05);
+        }else {
             salario = SALARIO_BASE;
-        }
-
-        if (experiencia >= 3) {
-            salario = salario + (salario * 0.05);
         }
 
         return salario;
@@ -79,56 +63,55 @@ public class Entrenador implements Pagable, Imprimible {
     public void imprimir() {
         System.out.println("Entrenador: " + nombre);
         System.out.println("\nAtletas asignados:");
-        if (atletasAsignados.isEmpty()) {
-            System.out.println("No hay atletas asignados.");
-        } else {
-            for (Atleta a : atletasAsignados) {
-                System.out.println("- " + a.getNombre());
-            }
+        for (Atleta a : atletasAsignados) {
+            System.out.println("- " + a.getNombre());
         }
     }
 
     // Metodos
     public boolean agregarAtleta(Atleta atleta) {
         return this.atletasAsignados.add(atleta);
-
     }
 
     // determinar Objetivo Plan de Entrenamiento
-    public String determinarObjetivoPlanEntrenamiento(Atleta atleta) {
-        String objetivo = "";
+    public String determinarObjetivoPlan(Atleta atleta) {
+        String objetivoGenerado = "";
+   /*     Bajo peso -> Ganar Masa muscular
+        Peso normal -> Mantenimiento
+        Sobrepeso -> Gasto Calorico
+        Obesidad -> Acondicionamiento metabolico*/
 
-        objetivo = switch (atleta.getClasificacionIMC()) {
-            case "Bajo peso" -> "Ganar masa muscular";
-            case "Peso normal" -> "Mantenimiento";
-            case "Sobrepeso" -> "Gasto Caloricos";
-            case "Obesidad" -> "Acondicionamieno metabolico";
-            default -> "Valor de IMC no válido";
-        };
-
-        return objetivo;
-    }
-
-    // preescribir Plan de entrenamiento
-    public boolean preescribirPlanEntrenamiento(Atleta atleta, PlanEntrenamiento plan) {
-        if (atleta == null || plan == null) {
-            System.out.println("Atleta o plan de entrenamiento no pueden ser nulos.");
-            return false;
+        switch (atleta.getClasificacionIMC()) {
+            case "Bajo peso" -> objetivoGenerado = "Ganar masa muscular";
+            case "Peso normal" -> objetivoGenerado = "Mantenimiento";
+            case "Sobrepeso" -> objetivoGenerado = "Gasto calórico";
+            case "Obesidad" -> objetivoGenerado = "Acondicionamiento metabolico";
+            default -> objetivoGenerado = "Clasificacion de IMC no encontrada";
         }
 
-        atleta.recibirPLanEntrenamiento(plan);
+        return objetivoGenerado;
+    }
+
+
+    // preescribir Plan de entrenamiento
+    public boolean preescribirPlan(Atleta atleta, PlanEntrenamiento plan) {
+        if (atleta == null || plan == null) {
+            return false;
+        }
+        atleta.recibirPlantEntrenamiento(plan);
         return true;
     }
 
-    //ENVIAR REPORTE
-    public boolean enviarReporte(GestorReporte gestor, Reporte reporte){
-        if (gestor == null || reporte == null) {
-            System.out.println("Gestor de reportes o reporte no pueden ser nulos.");
-            return false;
-        }
-        else {
-            gestor.guardarReporte(reporte);
-            return true;
-        }
+    // enviar reporte
+    public boolean enviarReporte(org.example.modelo.GestorReporte gestor, Reporte reporte) {
+        if (gestor == null || reporte == null) return false;
+        return gestor.guardarReportes(reporte);
     }
+
+    // Obtener los atletas por nombre de la lista asignados
+    public Atleta obtenerAtletaPorNombre(Atleta atleta) {
+        return atleta;
+    }
+
+
 }

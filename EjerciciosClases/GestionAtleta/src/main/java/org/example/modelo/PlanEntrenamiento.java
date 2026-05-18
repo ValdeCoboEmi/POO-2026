@@ -6,16 +6,17 @@ import java.util.Map;
 public class PlanEntrenamiento implements Imprimible {
 
     // atributos
+    // Ejercicios - duracion en minutos
     private Map<String, Double> ejerciciosDuracion;
     private String objetivo;
 
     // constructores
     public PlanEntrenamiento() {
-        this.ejerciciosDuracion = new HashMap<>();
+        ejerciciosDuracion = new HashMap<String, Double>();
     }
 
-    public PlanEntrenamiento(String objetivo) {
-        this.ejerciciosDuracion = new HashMap<>();
+    public PlanEntrenamiento(Map<String, Double> ejerciciosDuracion, String objetivo) {
+        this.ejerciciosDuracion = ejerciciosDuracion;
         this.objetivo = objetivo;
     }
 
@@ -24,42 +25,33 @@ public class PlanEntrenamiento implements Imprimible {
         return ejerciciosDuracion;
     }
 
-
+    /*    public void setEjerciciosDuracion(Map<String, Double> ejerciciosDuracion) {
+            this.ejerciciosDuracion = ejerciciosDuracion;
+        }*/
     public String getObjetivo() {
         return objetivo;
     }
-
     public void setObjetivo(String objetivo) {
         this.objetivo = objetivo;
     }
 
 
     // metodos
-    public boolean agregarEjercicios(String nombre, double duracion) {
-        try {
-            if (nombre == null || nombre.isEmpty()) {
-                throw new IllegalArgumentException("El nombre del ejercicio no puede ser nulo o vacío.");
-            } else if (duracion <= 0) {
-                throw new IllegalArgumentException("La duración del ejercicio debe ser mayor a cero.");
-            }
-
-            ejerciciosDuracion.put(nombre, duracion);
-            return true;
-        } catch (Exception e) {
-            System.out.println("Error al agregar ejercicio: " + e.getMessage());
-            return false;
-        }
+    public boolean agregarEjerciciosDuracion(String nombre, Double duracion) {
+        return ejerciciosDuracion.put(nombre, duracion) == null;
     }
 
 
     @Override
     public void imprimir() {
-        System.out.println("\nPlan de Entrenamiento:");
+        System.out.println("\nDetalles del plan de entrenamiento");
         System.out.println("Objetivo: " + objetivo);
-        System.out.println("Ejercicios y Duración:");
-        for (Map.Entry<String, Double> e : ejerciciosDuracion.entrySet()) {
-            System.out.println("- " + e.getKey() + ": " + e.getValue() + " minutos");
+        System.out.println("Ejercicios - duración: ");
+        // Como iterar el map con el for
+        for (Map.Entry<String, Double> entry : ejerciciosDuracion.entrySet()) {
+            System.out.println(" -Ejercicios " + entry.getKey() + " minutos:  " + entry.getValue());
         }
+
     }
 
 }

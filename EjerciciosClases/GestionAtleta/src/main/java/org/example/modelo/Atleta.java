@@ -16,8 +16,8 @@ public abstract class Atleta implements Imprimible{
     // nuevos atributos
     private double imc;
     private double promHorasEntrenamiento;
-    private String clasificacionIMC;
     private PlanEntrenamiento planActual;
+    private String clasificacionIMC;
 
     // Construct vacio
     public Atleta(){
@@ -37,27 +37,11 @@ public abstract class Atleta implements Imprimible{
         this.horasEntrenamientodiarias = horas;
         this.imc = imc;
         this.promHorasEntrenamiento = promHorasEntrenamiento;
-        planActual = new PlanEntrenamiento();
+        this.planActual = new PlanEntrenamiento();
+
     }
 
     // Metodos getter y setter
-
-    public String getClasificacionIMC() {
-        return clasificacionIMC;
-    }
-
-    public void setClasificacionIMC(String clasificacionIMC) {
-        this.clasificacionIMC = clasificacionIMC;
-    }
-
-    public PlanEntrenamiento getPlanActual() {
-        return planActual;
-    }
-
-    public void setPlanActual(PlanEntrenamiento planActual) {
-        this.planActual = planActual;
-    }
-
     public String getNombre() {
         return nombre;
     }
@@ -92,6 +76,7 @@ public abstract class Atleta implements Imprimible{
         this.altura = altura;
     }
 
+
     // Implementación de arreglo
     public double[] getHorasEntrenamientodiarias() {
         return horasEntrenamientodiarias;
@@ -111,6 +96,19 @@ public abstract class Atleta implements Imprimible{
     }
     public void setPromHorasEntrenamiento(double promHorasEntrenamiento) {
         this.promHorasEntrenamiento = promHorasEntrenamiento;
+    }
+
+    public PlanEntrenamiento getPlanActual() {
+        return planActual;
+    }
+    public void setPlanActual(PlanEntrenamiento planActual) {
+        this.planActual = planActual;
+    }
+    public String getClasificacionIMC() {
+        return clasificacionIMC;
+    }
+    public void setClasificacionIMC(String clasificacionIMC) {
+        this.clasificacionIMC = clasificacionIMC;
     }
 
     // Metodos de lógica de negocio
@@ -139,10 +137,6 @@ public abstract class Atleta implements Imprimible{
         } else if (getImc() >= 30) {
             clasificacionIMC = "Obesidad";
         }
-        else{
-            clasificacionIMC = "Valor de IMC no válido";
-        }
-
         return clasificacionIMC;
     }
 
@@ -174,15 +168,11 @@ public abstract class Atleta implements Imprimible{
     }
 
     // metodo recibir plan de entrenamiento
-    public boolean recibirPLanEntrenamiento(PlanEntrenamiento planActual){
-        if (planActual == null) {
-            System.out.println("El plan de entrenamiento no puede ser nulo.");
+    public boolean recibirPlantEntrenamiento(PlanEntrenamiento planActual){
+        if (planActual == null){
             return false;
         }
-        else{
-            this.planActual = planActual;
-            return true;
-        }
+        this.planActual = planActual;
+        return true;
     }
-
 }

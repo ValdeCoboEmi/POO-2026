@@ -29,6 +29,11 @@ public class Nadador extends Atleta {
 
     @Override
     public void entrenar(){
+
+        for (var ejercicio : getPlanActual().getEjerciciosDuracion().entrySet()) {
+            System.out.println("Ejercicio: " + ejercicio.getKey() + " - Duracion: " + ejercicio.getValue());
+        }
+
         System.out.println("El entrenamiento es en la piscina olimpica de la UES");
     }
 

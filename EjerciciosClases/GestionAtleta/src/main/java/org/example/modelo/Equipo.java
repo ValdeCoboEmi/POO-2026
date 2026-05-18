@@ -1,69 +1,52 @@
 package org.example.modelo;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class Equipo implements Imprimible {
+public class Equipo implements Imprimible{
 
     // atributos
-    private String nombreEquipo;
+    private String nombre;
     private List<Atleta> miembrosEquipo;
 
     // constructores
     public Equipo() {
-        this.miembrosEquipo = new ArrayList<>();
+        miembrosEquipo = new ArrayList<Atleta>();
     }
 
-    public Equipo(String nombreEquipo) {
-        this.nombreEquipo = nombreEquipo;
-        this.miembrosEquipo = new ArrayList<>();
+    public Equipo(String nombre, List<Atleta> miembrosEquipo) {
+        this.nombre = nombre;
+        this.miembrosEquipo = miembrosEquipo;
     }
 
-    // GETTER Y SETTER
-    public String getNombreEquipo() {
-        return nombreEquipo;
+    // Getter / setter
+    public String getNombre() {
+        return nombre;
     }
-
-    public void setNombreEquipo(String nombreEquipo) {
-        this.nombreEquipo = nombreEquipo;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
-
     public List<Atleta> getMiembrosEquipo() {
         return miembrosEquipo;
     }
-
-    //METODOS
-    public boolean agregarMiembro(Atleta atleta) {
-        try {
-            if (atleta == null) {
-                throw new IllegalArgumentException("El atleta no puede ser nulo.");
-            } else if (miembrosEquipo.contains(atleta)) {
-                throw new IllegalArgumentException("El atleta ya es miembro del equipo.");
-
-            }
-            else if(miembrosEquipo == null){
-                miembrosEquipo = new ArrayList<>();
-            }
-
-            miembrosEquipo.add(atleta);
-            return true;
-        }catch(Exception e) {
-            System.out.println("Error al agregar miembro al equipo: " + e.getMessage());
-            return false;
-        }
+    public void setMiembrosEquipo(List<Atleta> miembrosEquipo) {
+        this.miembrosEquipo = miembrosEquipo;
     }
 
-    // Imprimir
+    // metodos
+    public boolean agregarMiembroEquipo(Atleta atleta) {
+        if (atleta == null) {
+            return false;
+        }
+        return miembrosEquipo.add(atleta);
+    }
+
     @Override
     public void imprimir() {
-        // agregar informacion
-        System.out.println("\n\nNombre del equipo: " + this.nombreEquipo);
-
-        System.out.println("\nMiembros del equipo: ");
+        System.out.println("\nNombre del equipo: " + nombre);
+        System.out.println("Miembros equipo ");
         for (Atleta atleta : miembrosEquipo) {
-            System.out.println("Nombre del atleta: " + atleta.getNombre());
-            System.out.println("Edad del atleta: " + atleta.getEdad());
+            System.out.println(" -Nombre del atleta: "+ atleta.getNombre());
         }
     }
 
