@@ -22,7 +22,8 @@ public class EvaluacionEntrenamiento implements Runnable {
     @Override
     public void run() {
         // Imprimir nombre del entrenador y el atleta que esta evaluando
-        System.out.println("\nEl entrenador " + entrenador.getNombre() + " esta evaluando el entrenamiento del atleta " + atleta.getNombre());
+        System.out.println("\nEl entrenador " + entrenador.getNombre());
+        System.out.println("Evaluacion del atelta" + entrenador.obtenerAtletaPorNombre(atleta).getNombre());
 
         // Simula evaluación cada 5 segundos por la cantidad de ejercicios
         for (var ejercicios : atleta.getPlanActual().getEjerciciosDuracion().entrySet()) {
