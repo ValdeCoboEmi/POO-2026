@@ -45,6 +45,14 @@ public class Entrenador implements Pagable, Imprimible {
         this.atletasAsignados = atletasAsignados;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     @Override
     public double calcularSalario(){
         // Si años de experiencia es mayor a 3 incrementar el 5%
@@ -109,8 +117,14 @@ public class Entrenador implements Pagable, Imprimible {
     }
 
     // Obtener los atletas por nombre de la lista asignados
-    public Atleta obtenerAtletaPorNombre(Atleta atleta) {
-        return atleta;
+    public Atleta obtenerAtletaPorNombre(Atleta a) {
+        for (var altetas : atletasAsignados) {
+            if (altetas.getNombre().equals(a.getNombre())) {
+                return altetas;
+            }
+        }
+
+        return a;
     }
 
 

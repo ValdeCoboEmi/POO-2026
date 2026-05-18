@@ -1,6 +1,8 @@
 package org.example.ui;
 
 import org.example.catalogo.Deporte;
+import org.example.hilos.EntrenamientoAtleta;
+import org.example.hilos.EvaluacionEntrenamiento;
 import org.example.modelo.*;
 import org.example.modelo.GestorReporte;
 import org.example.patrones.estrategia.visualizacion.EstrategiaVisualizacion;
@@ -70,7 +72,8 @@ public class DatosQuemados {
         System.out.println("\nObjetivo generado para plan de entrenamiento: " + objetivoGenerado + " - Atleta: " + nadador1.getNombre());
 
         // Agregar ejercicios al plan despues de conocer el objetivo
-        plan1.agregarEjerciciosDuracion("Bicicleta", 10.0);
+        plan1.agregarEjerciciosDuracion("Bicicleta", 0.005);
+        plan1.agregarEjerciciosDuracion("Flexiones", 0.04);
         plan1.imprimir();
 
         // preescribir plan de entrenamiento al atleta
@@ -87,7 +90,7 @@ public class DatosQuemados {
 
         // Enviando reporte por entrenador1
         GestorReporte gestorReporte1 = new GestorReporte();
-        entrenador1.enviarReporte(gestorReporte1,reporte1);
+        entrenador1.enviarReporte(gestorReporte1, reporte1);
 
 
         // visualizando el reporte aplicando el patron strategy
@@ -98,13 +101,39 @@ public class DatosQuemados {
 
         // Imprimir el listado de los reportes desde el gestor
         System.out.println("\nListado de reportes ");
-        for (Reporte reporte: gestorReporte1.getReportes()){
+        for (Reporte reporte : gestorReporte1.getReportes()) {
             System.out.println("Detalles del reportes: ");
             System.out.println("Asunto " + reporte.getAsunto());
             System.out.println("Fecha " + reporte.getFecha());
         }
 
         nadador1.entrenar();
+
+        EntrenamientoAtleta tareaEntranamiento = new EntrenamientoAtleta(nadador1);
+
+        //CREAR HILO
+        Thread hiloEntrenamiento = new Thread(tareaEntranamiento);
+
+        //Iniciar el hilo
+        hiloEntrenamiento.start();
+        try {
+            hiloEntrenamiento.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            System.out.println("El hilo de entrenamiento ha sido interrumpido");
+        }
+
+        //EVALUACION ENTRENADOR
+        EvaluacionEntrenamiento tareaEvaluacion = new EvaluacionEntrenamiento(nadador1, entrenador1);
+        Thread hiloEvaluacion = new Thread(tareaEvaluacion);
+
+        hiloEvaluacion.start();
+
+        try {
+            hiloEvaluacion.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
     }
 }
