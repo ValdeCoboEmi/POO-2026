@@ -54,12 +54,17 @@ public class DatosQuemados {
         // Crear al entrenador
         Entrenador entrenador1 = new Entrenador("Julio", 4);
 
+        //Crear entrnador 2
+        Entrenador entrenador2 = new Entrenador("Martinez", 4);
+
         System.out.println("\nDatos del entrenador: ");
         System.out.println("Salario del entrenador $: " + entrenador1.calcularSalario());
 
         // Agregar atletas al entrenador
         entrenador1.agregarAtleta(nadador1);
         entrenador1.agregarAtleta(nadador2);
+
+        entrenador2.agregarAtleta(nadador1);
 
         entrenador1.imprimir();
 
@@ -78,6 +83,8 @@ public class DatosQuemados {
 
         // preescribir plan de entrenamiento al atleta
         entrenador1.preescribirPlan(nadador1, plan1);
+        entrenador2.preescribirPlan(nadador1, plan1);
+
 
         // Imprimiendo el plan de entrenamiento asignado a un atleta
         System.out.println("\nPlan de entrenamiento actual del atleta: " + nadador1.getNombre());
@@ -109,6 +116,11 @@ public class DatosQuemados {
 
         nadador1.entrenar();
 
+        //Crear reporte de evaluacion de etreanimaien
+        Reporte reporteEvaluacion = new Reporte();
+        reporteEvaluacion.setFecha(LocalDate.now());
+        reporteEvaluacion.setAsunto("Evaluacion del rendimiento....");
+
         EntrenamientoAtleta tareaEntranamiento = new EntrenamientoAtleta(nadador1);
 
         //CREAR HILO
@@ -124,16 +136,33 @@ public class DatosQuemados {
         }
 
         //EVALUACION ENTRENADOR
-        EvaluacionEntrenamiento tareaEvaluacion = new EvaluacionEntrenamiento(nadador1, entrenador1);
+        EvaluacionEntrenamiento tareaEvaluacion = new EvaluacionEntrenamiento(nadador1, entrenador1, reporteEvaluacion, gestorReporte1);
+        EvaluacionEntrenamiento tareaEvaluacion2 = new EvaluacionEntrenamiento(nadador1, entrenador2, reporteEvaluacion, gestorReporte1);
+
         Thread hiloEvaluacion = new Thread(tareaEvaluacion);
+        Thread hiloEvaluacion2 = new Thread(tareaEvaluacion2);
+
 
         hiloEvaluacion.start();
+        hiloEvaluacion2.start();
+
 
         try {
             hiloEvaluacion.join();
+            hiloEvaluacion2.join();
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
+
+        //INvocar el metodo de firmar el reporte
+        reporteEvaluacion.firmarReporte("Reporte autorizado por Gimansio UCA");
+
+        //Visualizar el reporte de evluacion en estrategia con estrategia con visualizacion completa
+        //Establecer la estregtiga
+        reporteEvaluacion.setEstrategia(estrategiaReporteCompleto);
+        //Visualizar
+        reporteEvaluacion.visualizar();
     }
 }

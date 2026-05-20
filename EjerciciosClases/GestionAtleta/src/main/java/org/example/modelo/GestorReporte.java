@@ -25,7 +25,7 @@ public class GestorReporte {
     }
 
     //METODOS
-    public boolean guardarReportes(Reporte reporte){
+    public synchronized boolean guardarReportes(Reporte reporte){
         try {
             if (reporte == null){
                 System.out.println("El reporte no puede ser nulo");

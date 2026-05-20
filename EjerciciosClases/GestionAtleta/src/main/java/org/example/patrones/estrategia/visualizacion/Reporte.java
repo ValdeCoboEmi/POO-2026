@@ -7,8 +7,11 @@ public class Reporte {
     private LocalDate fecha;
     private EstrategiaVisualizacion estrategia;
 
+    private StringBuilder firma;
+
     //CONSTRUCTORES
     public Reporte() {
+        firma  = new StringBuilder();
     }
 
     public Reporte(String asunto, LocalDate fecha,  EstrategiaVisualizacion estrategia) {
@@ -42,6 +45,14 @@ public class Reporte {
         this.estrategia = estrategia;
     }
 
+    public StringBuilder getFirma() {
+        return firma;
+    }
+
+    public void setFirma(StringBuilder firma) {
+        this.firma = firma;
+    }
+
     //METODOS
     public void visualizar() {
         if (estrategia != null) {
@@ -50,5 +61,10 @@ public class Reporte {
             System.out.println("No se ha definido una estrategia de visualización para este reporte.");
         }
 
+    }
+
+    //Implementar metodo firmaReporte
+    public synchronized void firmarReporte(String firma){
+        this.firma.append(firma);
     }
 }

@@ -6,9 +6,11 @@ public class Nadador extends Atleta {
 
     private String estilo;
 
-    public Nadador() {}
+    public Nadador() {
+    }
+
     public Nadador(String nombre, int edad, Deporte deporte,
-                   double peso, double altura, double [] horasEntreno,
+                   double peso, double altura, double[] horasEntreno,
                    double imc, double promEntreno, String estilo) {
         // atributos heredados
         super(nombre, edad, deporte, peso, altura, horasEntreno, imc, promEntreno);
@@ -18,23 +20,19 @@ public class Nadador extends Atleta {
     public String getEstilo() {
         return estilo;
     }
+
     public void setEstilo(String estilo) {
         this.estilo = estilo;
     }
 
-    public void cambiarEstilo(String nuevoEstilo){
+    public void cambiarEstilo(String nuevoEstilo) {
         this.estilo = nuevoEstilo;
         System.out.println("Estilo nuevo: " + getEstilo());
     }
 
     @Override
-    public void entrenar(){
-
-        for (var ejercicio : getPlanActual().getEjerciciosDuracion().entrySet()) {
-            System.out.println("Ejercicio: " + ejercicio.getKey() + " - Duracion: " + ejercicio.getValue());
-        }
-
-        System.out.println("El entrenamiento es en la piscina olimpica de la UES");
+    public void entrenar() {
+        System.out.println("El entrenamiento es en la piscina olimpica de la UCA");
     }
 
     @Override

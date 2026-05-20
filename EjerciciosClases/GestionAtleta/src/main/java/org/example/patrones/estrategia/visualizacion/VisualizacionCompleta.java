@@ -7,5 +7,8 @@ public class VisualizacionCompleta implements EstrategiaVisualizacion{
         System.out.println("Visualizacion completa del reporte");
         System.out.println("Asunto :" + reporte.getAsunto());
         System.out.println("Fecha: " + reporte.getFecha());
+
+        //Agregar el nuevo atributo de firma
+        System.out.println("Firma: " + reporte.getFirma() + "\n");
     }
 }
